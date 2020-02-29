@@ -1,2 +1,2 @@
 ## DataStructureCode
-This respository contains data code.
+This respository contains data structure code.
