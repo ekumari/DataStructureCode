@@ -1,2 +1,2 @@
 ## DataStructureCode
-This respository contains data structure code.
+This respository contains some popular data structure and algorithm problems .
