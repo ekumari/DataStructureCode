@@ -50,12 +50,18 @@ PV: Persistent Volume
     - Data in it exist beyond the lifecyle of pod
 
 Lifecyle of Persistent Volume:
-1. Provisioning: Admin creates a storage volume.. these volume can be any storage type such as block, nfs, distributed.. (called as PV)
+1. Provisioning: Admin creates a storage chunks/volume.. these volume can be any storage type such as block, nfs, distributed.. (called as PV)
 
     Provisioning done by 1. Static 2. Dynamic
 2. Binding: Bind the storage request to the persistent volume (that was provisioned earlier state) - called as PVC
+
+3. Using
+4. Reclaiming: when user is done with volume, they can delete the volume and claim the volume
 
 PVC: Persistent Volume Claim
 
     - Developer Request for storage of some capacity along with some access mode such as read-write or read only
     
+Provisioning has 2 types:
+- Static: PV needs to created before PVC (PersistentVolume create then PVC)
+- Dynamic: PV is created at the time of PVC (StorageClass create then PVC)

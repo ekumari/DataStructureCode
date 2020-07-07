@@ -1,0 +1,29 @@
+Microservices:
+
+1. Independent
+2. Talk to each other
+
+Thinks to consider:
+1. Solving scaling up of Microservices
+2. Modularity: change in small chunk and deploy that module without disturbing other Modular
+
+Monolith: Complexities hidden within
+Microservices: Complexities between Microservices
+
+Difference between Microservices and Web Services(SOA: Service Oriented Architecture)?
+
+- Web Services: you don't have idea about where to use it. No idea who will use.
+- Microservices: You have idea about what you are creating. For e.g: eCommerce site- build it as microservices, breaking down the whole application into microservices. Knowing very well the use of microservices.
+                 Can Potentially use it but thats not intended.
+
+ Web services deals with data only not UI. But UI can be microservices.
+
+Service Discovery Instead of Hard-Coding - possible through Kubernetes Service
+
+Step1: Create the services
+-> Using Maven, add required dependencies
+-> Using spring boot
+
+Dependencies: 
+- web for rest apis/MVC
+- 

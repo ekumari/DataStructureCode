@@ -49,6 +49,9 @@ secret/mysecret created
 
 kubectl get secrets mysecret -o yaml
 
+## Used in helm command
+
+helm install releaseName chartName -n june --set global.sofyImagePullSecret=mysecret
 
 ## Consumeing Secret from Volume
 mysecret-pod.yaml
@@ -74,4 +77,6 @@ xyz123
 
 kubectl exec mypod cat /etc/foo/username
 Anjani
+
+
 
