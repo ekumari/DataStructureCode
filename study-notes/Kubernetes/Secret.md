@@ -80,3 +80,4 @@ Anjani
 
 
 
+kubectl create secret docker-registry mysecretname --docker-server=https://hclcr.io --docker-username=anjani-k@hcl.com --docker-password=oac3temyo6vxt63tar2lb5w9oltwccsn
