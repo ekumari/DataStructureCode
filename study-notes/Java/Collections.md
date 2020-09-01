@@ -643,3 +643,600 @@ Output : [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
         mergedSet.addAll(a); 
         mergedSet.addAll(b); 
 ```
+
+### HASHTABLE
+
+- Key Value pair data structure
+- No null key or value
+
+To successfully store and retrieve objects from a hashtable, the objects used as keys must implement the hashCode method and the equals method.
+
+- Similar to hashMap but it is synchronized.
+
+Constructors:
+
+    Hashtable(): This is the default constructor.
+    Hashtable(int size): This creates a hash table that has initial size specified by size.
+    Hashtable(int size, float fillRatio)
+    Hashtable(Map m)
+    
+Methods: clear(),clone(), computeIfAbsent(Key, Function), contains(), containsKey(key), containsValue(value), equals(Object o), get(key), hashCode(), isEmpty(), put(key, value), putIfAbsent(Key, Function), putAll(Map t), remove(key), size(), toString(), values(),
+
+entrySet(): Return set view of map
+Hashtable<Integer, String> h =  new Hashtable<Integer, String>(); 
+h.put(3, "Geeks"); 
+h.put(2, "forGeeks"); 
+h.put(1, "isBest"); 
+Set s = h.entrySet();
+
+set entries: [3=Geeks, 2=forGeeks, 1=isBest]
+
+keySet(): Return key view of map as set.
+
+
+
+```
+// Java program to demonstrate 
+// computeIfAbsent(Key, Function) method. 
+
+import java.util.*; 
+
+public class GFG { 
+
+	// Main method 
+	public static void main(String[] args) 
+	{ 
+
+		// create a table and add some values 
+		Map<String, Integer> table = new Hashtable<>(); 
+		table.put("Pen", 10); 
+		table.put("Book", 500); 
+		table.put("Clothes", 400); 
+		table.put("Mobile", 5000); 
+
+		// print map details 
+		System.out.println("hashTable: "
+						+ table.toString()); 
+
+		// provide value for new key which is absent 
+		// using computeIfAbsent method 
+		table.computeIfAbsent("newPen", k -> 600); 
+		table.computeIfAbsent("newBook", k -> 800); 
+
+		// print new mapping 
+		System.out.println("new hashTable: "
+						+ table); 
+	} 
+} 
+```
+
+### Stack Class
+
+LIFO (Last In First Out)
+
+![image info](..\images\stack.png)
+
+Syntax: Stack<E> stack = new Stack<E>();
+
+Methods: 
+- stack.push(1): Push 1 to the top of the stack
+- stack.pop(): Delete top of the stack
+- stack.peek(): return top of the stack
+- empty()
+- search(element)
+
+
+## HashMap in Java with Examples
+- Based on Hashing technique
+- No duplicate Key but allows duplicate values
+- Key Value Pair
+- HashMap allows null key also but only once and multiple null values
+- java.util package.
+- implements cloneable and serializable
+
+```
+ // Create an empty hash map 
+        HashMap<String, Integer> map = new HashMap<>(); 
+  
+        // Add elements to the map 
+        map.put("vishal", 10); 
+        map.put("sachin", 30); 
+        map.put("vaibhav", 20); 
+  
+        // Print size and content 
+        System.out.println("Size of map is:- "+ map.size()); 
+        System.out.println(map); 
+
+O/P:
+Size of map is:- 3
+{vaibhav=20, vishal=10, sachin=30}
+```
+### Traversal of HashMap
+
+- For Loop: Map.Entry
+for (Map.Entry<String, Integer> e : map.entrySet()) 
+            System.out.println(e.getKey() + " " + e.getValue()); 
+
+- Using Iterator()
+Iterator hmIterator = hm.entrySet().iterator();
+while (hmIterator.hasNext()) { 
+            Map.Entry mapElement = (Map.Entry)hmIterator.next(); 
+            int marks = ((int)mapElement.getValue() + 10); 
+            System.out.println(mapElement.getKey() + " : " + marks); 
+} 
+
+- ForEach
+hm.forEach((k, v) -> System.out.println(k + " : " + (v + 10))); 
+
+### Convert HashMap to TreeMap
+
+Using Stream
+```
+Map<K, V> treeMap = hashMap 
+                          // Get the entries from the hashMap 
+                          .entrySet() 
+  
+                          // Convert the map into stream 
+                          .stream() 
+  
+                          // Now collect the returned TreeMap 
+                          .collect( 
+                              Collectors 
+  
+                                  // Using Collectors, collect the entries 
+                                  // and convert it into TreeMap 
+                                  .toMap( 
+                                      Map.Entry::getKey, 
+                                      Map.Entry::getValue, 
+                                      (oldValue, 
+                                       newValue) 
+                                          -> newValue, 
+                                      TreeMap::new)); 
+  
+        // Return the TreeMap 
+        return treeMap; 
+```
+
+Using Java 
+```
+        // Create a new TreeMap 
+        Map<K, V> treeMap = new TreeMap<>(); 
+  
+        // Pass the hashMap to putAll() method 
+        treeMap.putAll(hashMap); 
+  
+        // Return the TreeMap 
+        return treeMap; 
+```
+
+### Internal Structure of HashMap
+
+Internally HashMap contains an array of Node
+
+Class Node{
+    int hash;
+    K key;
+    V value;
+    Node next;
+}
+
+Initial capacity of hash map= 16 (0...15)
+
+Note : From Java 8 onward, Java has started using Self Balancing BST instead of linked list for chaining. The advantage of self balancing bst is, we get worst case (when every key maps to same slot) search time as O(Log n).
+
+Synchronized HashMap: Map m = Collections.synchronizedMap(new HashMap(...));
+
+Time complexity of HashMap: Constant time for get, put.
+
+### SortedMap Interface
+
+- Sorted order
+- TreeMap is the implementation of SortedMap Interface.
+
+### LinkedHashMap
+
+- Insertion order maintained
+- Same as HashMap
+- Inherits from HashMap with additional features of insertion order
+
+![image info](..\images\treemap.png)
+
+How LinkedHashMap work internally?
+
+- A LinkedHashMap is an extension of the HashMap class and it implements the Map interface
+
+public class LinkedHashMap extends HashMap implements Map
+
+In this class, the data is stored in the form of nodes. The implementation of the LinkedHashMap is very similar to a doubly-linked list. Therefore, each node of the LinkedHashMap is represented as:
+
+![image info](..\images\LinkedHashMap-Node-in-Java.png)
+
+### Java.util.Dictionary Class in Java
+
+- Abstract class, representing Key-Value pair and works similar to Map.
+- public abstract class Dictionary extends Object
+
+Methods of util.Dictionary Class:
+- put(K key, V value) 
+- elements(): Used for enumaration iteration -> Returns value in dictionary
+- get(K key)
+- isEmpty()
+- remove(Object key)
+- size()
+
+```
+ Dictionary geek = new Hashtable();
+
+// put() method 
+        geek.put("123", "Code"); 
+        geek.put("456", "Program")
+
+// elements() method : 
+        for (Enumeration i = geek.elements(); i.hasMoreElements();) 
+        { 
+            System.out.println("Value in Dictionary : " + i.nextElement()); 
+        } 
+```
+
+### ConcurrentHashMap in java
+- Implements ConcurrentMap and Serializable (Java 1.5)
+- Enhancement of HashMap in term of threads.
+- Underlying Data structure is HashTable.
+- Thread-Safe
+- At a time any number of threads are applicable for read operation without locking the ConcurrentHashMap object which is not there in HashMap
+- In ConcurrentHashMap, the Object is divided into number of segments according to the concurrency level
+- In ConcurrentHashMap, at a time any number of threads can perform retrieval operation but for updation in object, thread must lock the particular segment in which thread want to operate.This type of locking mechanism is known as Segment locking or bucket locking.Hence at a time 16 updation operations can be performed by threads.
+- null insertion is not possible in ConcurrentHashMap as key or value
+
+
+## Internal Working of HashMap in Java
+
+HashMap contains an array of Node and Node can represent a class having following objects :
+
+    1. int hash
+    2. K key
+    3. V value
+    4. Node next
+
+Hashing: It is the process of converting an object into integer form by using the method hashCode(). Necessary to write hashCode method properly for better performance.
+
+Override hashCode and equals to provide better implementation.
+
+**hashCode() method**: hashCode() method is used to get the hash Code of an object. hashCode() method of object class returns the memory reference of object in integer form. In HashMap, hashCode() is used to calculate the bucket and therefore calculate the index.
+
+**equals() method**: equals method is used to check that 2 objects are equal or not. This method is provided by Object class. You can override this in your class to provide your own implementation.
+HashMap uses equals() to compare the key whether the are equal or not. If equals() method return true, they are equal otherwise not equal.
+
+**Buckets**: One element of HashMap array. Two or more nodes can have the same bucket. In that                case link list structure is used to connect the nodes
+                capacity = number of buckets * load factor
+
+The better your hashCode() method is, the better your buckets will be utilized
+
+Index Calculation in Hashmap:-
+
+-   index = hashCode(key) & (n-1).
+
+Example: HashMap map = new HashMap();
+
+- Insert Key-Value Pair: map.put(new Key("vishal"), 20);
+
+Steps:
+
+    Calculate hash code of Key {“vishal”}. It will be generated as 118.
+    Calculate index by using index method it will be 6.
+    Create a node object as :
+
+    {
+      int hash = 118
+
+      // {"vishal"} is not a string but 
+      // an object of class Key
+      Key key = {"vishal"}
+
+      Integer value = 20
+      Node next = null
+    }
+
+Place this object at index 6, if no other object is presented there.
+
+Now HashMap becomes:
+
+![image info](..\images\Hashmap_working_1.jpg
+)
+
+- Insert another: map.put(new Key("sachin"), 30);
+
+Steps:
+
+    Calculate hashCode of Key {“sachin”}. It will be generated as 115.
+    Calculate index by using index method it will be 3.
+    Create a node object as :
+
+    {
+      int hash = 115
+      Key key = {"sachin"}
+      Integer value = 30
+      Node next = null
+    }
+
+    Place this object at index 3 if no other object is presented there.
+
+Now HashMap becomes :
+
+![image info](..\images\Hashmap_working_2.jpg)
+
+In Case of collision: Now, putting another pair that is,
+
+map.put(new Key("vaibhav"), 40);
+
+Steps:
+
+    Calculate hash code of Key {“vaibhav”}. It will be generated as 118.
+    Calculate index by using index method it will be 6.
+    Create a node object as :
+
+     {
+      int hash = 118
+      Key key = {"vaibhav"}
+      Integer value = 40
+      Node next = null
+    }
+
+Place this object at index 6 if no other object is presented there.
+In this case a node object is found at the index 6 – this is a case of collision.
+In that case, check via hashCode() and equals() method that if both the keys are same.
+If keys are same, replace the value with current value.
+Otherwise connect this node object to the previous node object via linked list and both are stored at index 6.
+Now HashMap becomes : 
+
+![image info](..\images\Hashmap_working_3.jpg)
+
+Using get method():
+- map.get(new Key("sachin"));
+
+Steps:
+
+    Calculate hash code of Key {“sachin”}. It will be generated as 115.
+    Calculate index by using index method it will be 3.
+    Go to index 3 of array and compare first element’s key with given key. If both are equals then return the value, otherwise check for next element if it exists.
+    In our case it is found as first element and returned value is 30.
+
+
+- map.get(new Key("vaibhav"));
+
+Steps:
+
+    Calculate hash code of Key {“vaibhav”}. It will be generated as 118.
+    Calculate index by using index method it will be 6.
+    Go to index 6 of array and compare first element’s key with given key. If both are equals then return the value, otherwise check for next element if it exists.
+    In our case it is not found as first element and next of node object is not null.
+    If next of node is null then return null.
+    If next of node is not null traverse to the second element and repeat the process 3 until key is not found or next is not null.
+
+HashMap Changes in Java 8
+
+- In case of hash collision entry objects are stored as a node in a linked-list and equals() method is used to compare keys. That comparison to find the correct key with in a linked-list is a linear operation so in a worst case scenario the complexity becomes O(n).
+To address this issue, Java 8 hash elements use balanced trees instead of linked lists after a certain threshold is reached. Which means HashMap starts with storing Entry objects in linked list but after the number of items in a hash becomes larger than a certain threshold, the hash will change from using a linked list to a balanced tree, which will improve the worst case performance from O(n) to O(log n)
+
+
+## Collection Interview Question:
+
+- Vector vs ArrayList in Java
+
+|  Vector      |      ArrayList   | 
+|--------------|:-----------------|
+| Synchronized    |  Not Synchronized | 
+| Slow     |    Faster   | 
+| Enumeration and Iterator for traversal     | Iterator | 
+
+
+
+-  ArrayList vs LinkedList in Java
+
+|  ArrayList      |      LinkedList   | 
+|--------------|:-----------------|
+| Dynamic array    |  Doubly linked list |
+| Manipulating ArrayList takes more time    |   Manipulating LinkedList takes less time compared to ArrayList because, in a doubly-linked list, there is no concept of shifting the memory bits   | 
+| Contigous locations     | Not Contiguous locations |
+| implements a List interface. | implements both the List interface and the Deque interface. |
+| Better for storing the data | Better for manipulation of stored data|
+
+- HashMap vs HashTable
+
+|  HashMap     |      HashTable   | 
+|--------------|:-----------------|
+| Not synchronized    |  Synchronized |
+| Allows one null key and multiple null values    |   Doesn’t allow any null key or value.   | 
+
+
+### Real Life Applications
+
+- Suppose you were creating a mapping of names to Person objects. You might want to periodically output the people in alphabetical order by name. A TreeMap lets you do this.
+- A TreeMap also offers a way to, given a name, output the next 10 people. This could be useful for a “More”function in many applications.
+- A LinkedHashMap is useful whenever you need the ordering of keys to match the ordering of insertion. This might be useful in a caching situation, when you want to delete the oldest item.
+- Generally, unless there is a reason not to, you would use HashMap. That is, if you need to get the keys back in insertion order, then use LinkedHashMap. If you need to get the keys back in their true/natural order, then use TreeMap. Otherwise, HashMap is probably best. It is typically faster and requires less overhead.
+
+![image info](..\images\comparisonTable.png
+)
+
+
+## Comparable vs Comparator in Java
+
+Two interface to sort objects using data members:
+- Comparable
+- Comparator
+
+**They are mostly used to sort object of list**
+
+Using Comparable Interface:
+- Compare itself with another object.
+- Class has to Implements Comparable interface.
+- override the method compareTo()
+
+```
+// A Java program to demonstrate use of Comparable 
+import java.io.*; 
+import java.util.*; 
+
+// A class 'Movie' that implements Comparable 
+class Movie implements Comparable<Movie> 
+{ 
+	private double rating; 
+	private String name; 
+	private int year; 
+
+	// Used to sort movies by year 
+	public int compareTo(Movie m) 
+	{ 
+		return this.year - m.year; 
+	} 
+
+	// Constructor 
+	public Movie(String nm, double rt, int yr) 
+	{ 
+		this.name = nm; 
+		this.rating = rt; 
+		this.year = yr; 
+	} 
+
+	// Getter methods for accessing private data 
+	public double getRating() { return rating; } 
+	public String getName() { return name; } 
+	public int getYear()	 { return year; } 
+} 
+
+// Driver class 
+class Main 
+{ 
+	public static void main(String[] args) 
+	{ 
+		ArrayList<Movie> list = new ArrayList<Movie>(); 
+		list.add(new Movie("Force Awakens", 8.3, 2015)); 
+		list.add(new Movie("Star Wars", 8.7, 1977)); 
+		list.add(new Movie("Empire Strikes Back", 8.8, 1980)); 
+		list.add(new Movie("Return of the Jedi", 8.4, 1983)); 
+
+		Collections.sort(list); // uses compareTo method internally
+
+		System.out.println("Movies after sorting : "); 
+		for (Movie movie: list) 
+		{ 
+			System.out.println(movie.getName() + " " + 
+							movie.getRating() + " " + 
+							movie.getYear()); 
+		} 
+	} 
+} 
+```
+Now, suppose we want to sort movies by rating and names too. When we make a collection element comparable(by having it implement Comparable), we get only one chance to implement the compareTo() method. The solution is using Comparator.
+
+
+Using Comparator: 
+
+- Unlike Comparable, Comparator is external to the element type we are comparing.
+- It’s a separate class. We create multiple separate classes (that implement Comparator) to compare by different members.
+- Collections class has a second sort() method and it takes Comparator. Sort() method invokes compare() methods to sort objects.
+
+```
+//A Java program to demonstrate Comparator interface 
+import java.io.*; 
+import java.util.*; 
+
+// A class 'Movie' that implements Comparable 
+class Movie implements Comparable<Movie> 
+{ 
+	private double rating; 
+	private String name; 
+	private int year; 
+
+	// Used to sort movies by year 
+	public int compareTo(Movie m) 
+	{ 
+		return this.year - m.year; 
+	} 
+
+	// Constructor 
+	public Movie(String nm, double rt, int yr) 
+	{ 
+		this.name = nm; 
+		this.rating = rt; 
+		this.year = yr; 
+	} 
+
+	// Getter methods for accessing private data 
+	public double getRating() { return rating; } 
+	public String getName() { return name; } 
+	public int getYear()	 { return year; } 
+} 
+
+// Class to compare Movies by ratings 
+class RatingCompare implements Comparator<Movie> 
+{ 
+	public int compare(Movie m1, Movie m2) 
+	{ 
+		if (m1.getRating() < m2.getRating()) return -1; 
+		if (m1.getRating() > m2.getRating()) return 1; 
+		else return 0; 
+	} 
+} 
+
+// Class to compare Movies by name 
+class NameCompare implements Comparator<Movie> 
+{ 
+	public int compare(Movie m1, Movie m2) 
+	{ 
+		return m1.getName().compareTo(m2.getName()); 
+	} 
+} 
+
+// Driver class 
+class Main 
+{ 
+	public static void main(String[] args) 
+	{ 
+		ArrayList<Movie> list = new ArrayList<Movie>(); 
+		list.add(new Movie("Force Awakens", 8.3, 2015)); 
+		list.add(new Movie("Star Wars", 8.7, 1977)); 
+		list.add(new Movie("Empire Strikes Back", 8.8, 1980)); 
+		list.add(new Movie("Return of the Jedi", 8.4, 1983)); 
+
+		// Sort by rating : (1) Create an object of ratingCompare 
+		//				 (2) Call Collections.sort 
+		//				 (3) Print Sorted list 
+		System.out.println("Sorted by rating"); 
+		RatingCompare ratingCompare = new RatingCompare(); 
+		Collections.sort(list, ratingCompare); 
+		for (Movie movie: list) 
+			System.out.println(movie.getRating() + " " + 
+							movie.getName() + " " + 
+							movie.getYear()); 
+
+
+		// Call overloaded sort method with RatingCompare 
+		// (Same three steps as above) 
+		System.out.println("\nSorted by name"); 
+		NameCompare nameCompare = new NameCompare(); 
+		Collections.sort(list, nameCompare); 
+		for (Movie movie: list) 
+			System.out.println(movie.getName() + " " + 
+							movie.getRating() + " " + 
+							movie.getYear()); 
+
+		// Uses Comparable to sort by year 
+		System.out.println("\nSorted by year"); 
+		Collections.sort(list); 
+		for (Movie movie: list) 
+			System.out.println(movie.getYear() + " " + 
+							movie.getRating() + " " + 
+							movie.getName()+" "); 
+	} 
+} 
+```
+
+**Important Points**:
+
+- Comparable is for natural ordering which means the object itself must know how it is to be ordered. For example Roll Numbers of students Whereas, Comparator interface sorting is done through a separate class.
+- Logically, Comparable interface compares “this” reference with the object specified and Comparator in Java compares two different class objects provided.
+- If any class implements Comparable interface in Java then collection of that object either List or Array can be sorted automatically by using Collections.sort() or Arrays.sort() method and objects will be sorted based on there natural order defined by CompareTo method.
+
+**To summarize, if sorting of objects needs to be based on natural order then use Comparable whereas if you sorting needs to be done on attributes of different objects, then use Comparator in Java.**
