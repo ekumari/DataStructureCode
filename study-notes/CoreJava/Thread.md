@@ -1,1 +1,0 @@
-https://www.javatpoint.com/java-multithreading-interview-questions

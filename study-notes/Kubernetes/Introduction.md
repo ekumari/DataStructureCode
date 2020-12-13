@@ -21,3 +21,6 @@ E.g : GKE [Google Kubernetes Engine]
 Kubectl get pods
 
 kubectl get svc
+
+
+Links:  https://multinode-kubernetes-cluster.readthedocs.io/en/latest/07-k8s-replicasets.html
